@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Covid-19 Tracking App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <section class="hero is-danger">
+      <div class="container p-3">
+        <div class="columns is-centered is-vcentered is-mobile">
+          <div class="column is-narrow has-text-centered">
+            <h1 class="title is-2 is-align-self-center">
+              Covid-19 Tracking App
+            </h1>
+            <h5 class="subtitle is-align-self-center">
+              Search for Covid-19 Updates
+            </h5>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- main -->
+    <div class="tile is-parent">
+      <!-- left column -->
+      <aside
+        class="left-column tile is-child notification has-background-grey-dark"
+      >
+        <!-- search 1 -->
+        <div class="field has-addons has-addons-centered">
+          <div class="control" id="input-div">
+            <input
+              id="input"
+              class="input"
+              type="text"
+              placeholder="Search a country"
+            />
+          </div>
+          <div class="control" id="search-buttonC">
+            <a class="button is-info">
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <!-- search 2 -->
+        <div class="field has-addons has-addons-centered">
+          <div class="control" id="input-div">
+            <input
+              id="input"
+              class="input"
+              type="text"
+              placeholder="Search a province"
+            />
+          </div>
+          <div class="control" id="search-buttonP">
+            <a class="button is-info">
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <!-- search 3 -->
+        <div class="field has-addons has-addons-centered">
+          <div class="control" id="input-div">
+            <input
+              id="input"
+              class="input"
+              type="text"
+              placeholder="Search a city"
+            />
+          </div>
+          <div class="control" id="search-button-city">
+            <a class="button is-info">
+              <i class="fa fa-search"></i>
+            </a>
+          </div>
+        </div>
+        <!-- history list-->
+        <div class="city-display left-down-col list-group mt-5" id="list-group">
+          <!-- <button class="button is-fullwidth list-group-item" id="list-group-item"></button> -->
+        </div>
+        <div class="clear-button-div"></div>
+      </aside>
+
+      <!-- right column -->
+      <div class="tile is-child notification is-vertical is-9">
+        <div
+          class="display-flex is-flex-wrap-wrap is-justify-content-flex-start pl-3 pb-2"
+        >
+          <div id="flag"></div>
+          <h2 id="country-province" class="ml-5 mt-3"></h2>
+          <p id="confirm" class="ml-5 mt-5"></p>
+        </div>
+        <div id="chartdiv" class="row map"></div>
+      </div>
+    </div>
+
+    <!-- modal -->
+    <div class="modal" id="modal-div">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Display Message -->
+        <div class="box">
+          <article class="media">
+            <div class="media-left">
+              <figure class="image is-64x64">
+                <a class="button is-info">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </a>
+              </figure>
+            </div>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong class="is-size-5">Message</strong>
+                  <br />
+                  Search Not Found, Please Try Again!
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <button
+        class="modal-close is-large"
+        id="modal-close"
+        aria-label="close"
+      ></button>
+    </div>
+
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
+    ></script>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/geodata/worldLow.js"></script>
+    <script src="https://covid.amCharts.com/data/js/world_timeline.js"></script>
+    <script src="https://covid.amCharts.com/data/js/total_timeline.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
