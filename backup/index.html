@@ -19,20 +19,9 @@
             <h1 class="title is-2 is-align-self-center">
               Covid-19 Tracking App
             </h1>
-            <h5 class="subtitle is-align-self-center is-black">
+            <h5 class="subtitle is-align-self-center">
               Search for Covid-19 Updates
             </h5>
-            <!-- nav bar -->
-            <nav>
-              <ul>
-                <li>
-                  <a href="#Covid-19-Map">Covid-19 Map</a>
-                </li>
-                <li>
-                  <a href="#Covid-19-Tests">Covid-19 Tests</a>
-                </li>
-              </ul>
-            </nav>
           </div>
         </div>
       </div>
@@ -91,61 +80,10 @@
             </a>
           </div>
         </div>
-        <!-- final search area -->
-        <div id="search-section">
-          <input
-            class="input mb-2"
-            type="text"
-            placeholder="Your Search Input"
-            id="input"
-          />
-          <div class="field has-addons" id="option-search">
-            <div class="control is-expanded" id="option-div">
-              <div class="select is-fullwidth">
-                <select name="Category">
-                  <option>Category</option>
-                  <option id="search-buttonC">Country</option>
-                  <option id="search-buttonP">Province</option>
-                  <option id="search-button-city">County/City</option>
-                </select>
-              </div>
-            </div>
-            <div class="control">
-              <button type="submit" class="button is-info" id="search-div">
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
         <!-- history list-->
-        <div class="left-down-col list-group-all mt-5" id="list-group-country">
+        <div class="city-display left-down-col list-group mt-5" id="list-group">
           <!-- <button class="button is-fullwidth list-group-item" id="list-group-item"></button> -->
-          <!-- <div class="field has-addons" id="button-set">
-            <div class="control is-expanded" id="button-div">
-              <button
-                class="button is-fullwidth list-group-item"
-                id="list-group-item"
-              >
-                Testing
-              </button>
-            </div>
-            <div class="control" id="delete-div">
-              <button class="button is-danger" id="delete-btn">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-          </div>  -->
         </div>
-
-        <div
-          class="left-down-col list-group-all mt-5"
-          id="list-group-province"
-        ></div>
-        <div
-          class="left-down-col list-group-all mt-5"
-          id="list-group-city"
-        ></div>
-
         <div class="clear-button-div"></div>
       </aside>
 
@@ -162,7 +100,7 @@
       </div>
     </div>
 
-    <!-- modal for search not found-->
+    <!-- modal -->
     <div class="modal" id="modal-div">
       <div class="modal-background"></div>
       <div class="modal-content">
@@ -194,67 +132,6 @@
         aria-label="close"
       ></button>
     </div>
-
-    <!-- modal for no input -->
-    <div class="modal" id="modal-div-no-input">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <!-- Display Message -->
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
-                <a class="button is-danger">
-                  <i class="fas fa-search"></i>
-                </a>
-              </figure>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong class="is-size-5">Message</strong>
-                  <br />
-                  You Need To Type Something!
-                </p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-      <button
-        class="modal-close is-large"
-        id="modal-2-close"
-        aria-label="close"
-      ></button>
-    </div>
-
-    <!-- Table for Covid-19-->
-    <section id="Covid-19-Tests" class="hover">
-      <div
-        class="display-flex is-flex-wrap-wrap is-justify-content-flex-start pl-3 pb-2"
-        id="#Covid-19-Tests"
-      >
-        <iframe
-          src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand"
-          style="width: 100%; height: 300px; border: 0px none"
-        >
-        </iframe>
-      </div>
-    </section>
-
-    <!-- footer-->
-    <footer class="footer has-background-danger">
-      <div class="content has-text-centered">
-        <p>
-          <strong>Covid-19 2020. Stay Safe, Wear a Mask.</strong>
-          Data from Testing was Retrived by Open Source,
-          <a
-            href="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand?time=2020-02-20..latest"
-            >https://ourworldindata.org/</a
-          >
-        </p>
-      </div>
-    </footer>
 
     <!-- scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

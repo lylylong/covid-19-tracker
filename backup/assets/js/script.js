@@ -2,9 +2,6 @@
 
 // initial the input variable
 let input = "";
-let inputList = "";
-let inputBtn = "";
-let deleteDiv = "";
 
 // get the input search stored in the array
 let countryArray = JSON.parse(localStorage.getItem("countryArray")) || [];
@@ -13,26 +10,16 @@ let cityArray = JSON.parse(localStorage.getItem("cityArray")) || [];
 
 // Modal Setup
 let modal = document.querySelector("#modal-div");
-let modalNoInput = document.querySelector("#modal-div-no-input");
 // modal open function
 function modalOpen() {
   modal.style.display = "block";
-}
-function modalNoInputOn() {
-  modalNoInput.style.display = "block";
 }
 // modal off function
 function modalOff() {
   modal.style.display = "none";
 }
-function modalNoInputOff() {
-  modalNoInput.style.display = "none";
-}
 $("#modal-close").on("click", function () {
   modalOff();
-});
-$("#modal-2-close").on("click", function () {
-  modalNoInputOff();
 });
 
 // title case function, to title case the input
@@ -46,29 +33,6 @@ function titleCase(string) {
     .join(" ");
 }
 
-// create history buttons
-function createHistory() {
-  // let inputList = $("#list-group-country");
-  let buttonSet = document.createElement("div");
-  buttonSet.classList = "field has-addons button-set";
-  let buttonDiv = document.createElement("div");
-  buttonDiv.classList = "control is-expanded";
-  inputBtn = document.createElement("button");
-  inputBtn.classList = "button is-fullwidth list-group-item";
-  deleteDiv = document.createElement("div");
-  deleteDiv.classList = "control delete-div";
-  let deleteBtn = document.createElement("button");
-  deleteBtn.classList = "button is-danger";
-  let deleteIcon = document.createElement("i");
-  deleteIcon.classList = "fas fa-trash-alt";
-  buttonDiv.append(inputBtn);
-  buttonSet.append(buttonDiv);
-  deleteBtn.append(deleteIcon);
-  deleteDiv.append(deleteBtn);
-  buttonSet.append(deleteDiv);
-  inputList.append(buttonSet);
-}
-
 // Country Array Setup
 function saveCountryInputLocal() {
   // if the input saved before, don't need to save again
@@ -78,55 +42,32 @@ function saveCountryInputLocal() {
   // local storage - save inputs to the array & create history on the left panel
   countryArray.push(titleCase(input));
   localStorage.setItem("countryArray", JSON.stringify(countryArray));
-  inputList = $("#list-group-country");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = titleCase(input);
+  inputList.append(inputBtn);
   // enable the button right after the creation
   inputBtn.onclick = function () {
     input = inputBtn.textContent;
-    console.log(input);
     // invoke the search function
     // document.querySelector("img")?.remove();
     getCountryData();
   };
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    countryArray = JSON.parse(localStorage.getItem("countryArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    countryArray.splice(countryArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("countryArray", JSON.stringify(countryArray));
-    if ((countryArray.length = 1)) {
-      countryArray = [];
-    }
-
-    $(this).parents(".button-set").remove();
-  };
 }
 // initial print the local storage
 for (let i = 0; i < countryArray.length; i++) {
-  inputList = $("#list-group-country");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = countryArray[i];
-
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    countryArray = JSON.parse(localStorage.getItem("countryArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    countryArray.splice(countryArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("countryArray", JSON.stringify(countryArray));
-    if ((countryArray.length = 1)) {
-      countryArray = [];
-    }
-
-    $(this).parents(".button-set").remove();
-  };
+  inputList.append(inputBtn);
 }
 // stored search, click & use it to fetch
-$("#list-group-country").on("click", ".list-group-item", function () {
+$(".list-group-item").on("click", function () {
   input = $(this).text();
-  console.log(input);
   // invoke the search function
-  document.querySelector("img")?.remove();
+  // document.querySelector("img")?.remove();
   getCountryData();
 });
 
@@ -139,9 +80,11 @@ function saveProvinceInputLocal() {
   // local storage - save inputs to the array & create history on the left panel
   provinceArray.push(titleCase(input));
   localStorage.setItem("provinceArray", JSON.stringify(provinceArray));
-  inputList = $("#list-group-province");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = titleCase(input);
+  inputList.append(inputBtn);
   // enable the button right after the creation
   inputBtn.onclick = function () {
     input = inputBtn.textContent;
@@ -149,38 +92,17 @@ function saveProvinceInputLocal() {
     document.querySelector("img")?.remove();
     getProvinceData();
   };
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    provinceArray = JSON.parse(localStorage.getItem("provinceArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    provinceArray.splice(provinceArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("provinceArray", JSON.stringify(provinceArray));
-    if ((provinceArray.length = 1)) {
-      provinceArray = [];
-    }
-    $(this).parents(".button-set").remove();
-  };
 }
 // initial print the local storage
 for (let i = 0; i < provinceArray.length; i++) {
-  inputList = $("#list-group-province");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = provinceArray[i];
-
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    provinceArray = JSON.parse(localStorage.getItem("provinceArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    provinceArray.splice(provinceArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("provinceArray", JSON.stringify(provinceArray));
-    if ((provinceArray.length = 1)) {
-      provinceArray = [];
-    }
-    $(this).parents(".button-set").remove();
-  };
+  inputList.append(inputBtn);
 }
 // stored search, click & use it to fetch
-$("#list-group-province").on("click", ".list-group-item", function () {
+$(".list-group-item").on("click", function () {
   input = $(this).text();
   // invoke the search function
   document.querySelector("img")?.remove();
@@ -196,9 +118,11 @@ function saveCityInputLocal() {
   // local storage - save inputs to the array & create history on the left panel
   cityArray.push(titleCase(input));
   localStorage.setItem("cityArray", JSON.stringify(cityArray));
-  inputList = $("#list-group-city");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = titleCase(input);
+  inputList.append(inputBtn);
   // enable the button right after the creation
   inputBtn.onclick = function () {
     input = inputBtn.textContent;
@@ -206,41 +130,18 @@ function saveCityInputLocal() {
     document.querySelector("img")?.remove();
     getCityData();
   };
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    cityArray = JSON.parse(localStorage.getItem("cityArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    cityArray.splice(cityArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("cityArray", JSON.stringify(cityArray));
-    if ((cityArray.length = 1)) {
-      cityArray = [];
-    }
-
-    $(this).parents(".button-set").remove();
-  };
 }
 
 // initial print the local storage
 for (let i = 0; i < cityArray.length; i++) {
-  inputList = $("#list-group-city");
-  createHistory();
+  let inputList = $("#list-group");
+  let inputBtn = document.createElement("button");
+  inputBtn.classList = "button is-fullwidth list-group-item";
   inputBtn.textContent = cityArray[i];
-
-  deleteDiv.onclick = function () {
-    let toBeDelete = $(this).siblings().children(".list-group-item").text();
-    cityArray = JSON.parse(localStorage.getItem("cityArray"));
-    // let index = countryArray.indexOf(toBeDelete);
-    cityArray.splice(cityArray.indexOf(toBeDelete), 1);
-    localStorage.setItem("cityArray", JSON.stringify(cityArray));
-    if ((cityArray.length = 1)) {
-      cityArray = [];
-    }
-
-    $(this).parents(".button-set").remove();
-  };
+  inputList.append(inputBtn);
 }
 // stored search, click & use it to fetch
-$("#list-group-city").on("click", ".list-group-item", function () {
+$(".list-group-item").on("click", function () {
   input = $(this).text();
   // invoke the search function
   document.querySelector("img")?.remove();
@@ -248,32 +149,30 @@ $("#list-group-city").on("click", ".list-group-item", function () {
 });
 // END OF ARRAY SETUP
 
-// One click to remove the history & clear the local storage
+// Remove the history & clear the local storage
 function createClearButton() {
   let = clearButtonDiv = $(".clear-button-div");
   let = clearButton = document.createElement("button");
   clearButton.classList = "button clear-button is-rounded is-danger mt-3";
-  clearButton.textContent = "Clear All History";
+  clearButton.textContent = "Clear History";
   clearButtonDiv.append(clearButton);
   $(clearButton).on("click", function () {
-    $(".list-group-all").children("#button-set").remove();
+    $(".city-display").children(".list-group-item").remove();
     localStorage.clear();
     // reload the browser
     location.reload(true);
   });
 }
 createClearButton();
+////////////// END OF DATA PREPARATION /////////////
 
-//////////////// END OF DATA PREPARATION //////////////
-
-///////////////////// FETCH INPUT /////////////////////
+////////////////// FETCH INPUT ////////////////////
 // Input & Search 1: Country
 // Click the button to submit a country input & fetch data
 $("#search-buttonC").on("click", function () {
   document.querySelector("img")?.remove();
   console.log("country search button is clicked");
   input = $(this).siblings("#input-div").children("#input").val();
-
   if (
     input === "US" ||
     input === "us" ||
@@ -284,11 +183,6 @@ $("#search-buttonC").on("click", function () {
   ) {
     input = "United States";
   }
-
-  if (input === null || input === "") {
-    modalNoInputOn();
-  }
-
   // call the fetch function
   getCountryData();
   saveCountryInputLocal();
@@ -351,13 +245,7 @@ $("#search-buttonP").on("click", function () {
   document.querySelector("img")?.remove();
   console.log("province search button is clicked");
   input = $(this).siblings("#input-div").children("#input").val();
-
-  if (input === null || input === "") {
-    modalNoInputOn();
-  }
-
   if (input === "china" || input === "China" || input === "CHINA") {
-    modalOpen();
     return;
   }
   // call the fetch function
@@ -425,11 +313,9 @@ $("#search-button-city").on("click", function () {
   document.querySelector("img")?.remove();
   console.log("city search button is clicked");
   input = $(this).siblings("#input-div").children("#input").val();
-
-  if (input === null || input === "") {
-    modalNoInputOn();
+  if (input === "ontario" || input === "Ontario" || input === "ONTARIO") {
+    return;
   }
-
   // call the fetch function
   getCityData();
   saveCityInputLocal();
@@ -447,7 +333,6 @@ function getCityData() {
       }
     })
     .then(function (responseJson) {
-      // console.log(responseJson);
       for (let i = 0; i < responseJson.data.length; i++) {
         // Returns the input city
         if (responseJson.data[i].location.includes(titleCase(input))) {
@@ -455,13 +340,13 @@ function getCityData() {
           let confirm = document.querySelector("#confirm");
           let city = document.querySelector("#country-province");
           let mostRecentData = responseJson.data[i].updated.split(" ")[0];
-
+          if (responseJson.data[i].location === "Ontario County, New York") {
+            return;
+          }
           if (responseJson.data[i].location === "Come to Beijing from abroad") {
             responseJson.data[i].location = "Beijing";
           }
-          if (
-            responseJson.data[i].location === "Come to Shanghai from abroad."
-          ) {
+          if (responseJson.data[i].location === "Foreign to Shanghai") {
             responseJson.data[i].location = "Shanghai";
           }
           city.textContent =
@@ -499,23 +384,53 @@ function getCityData() {
 }
 //////////////// END OF FETCH INPUT ////////////////
 
-///////////////////// MAP AREA /////////////////////
+///////////////////// MAP AREA ////////////////////
 am4core.ready(function () {
-  // DATA AREA
+  //////////////////////////////// KEEP TOP
+  // the world total data
+  // console.log(covid_total_timeline);
+  let lastDateWorld =
+    covid_total_timeline[covid_total_timeline.length - 1].date;
+  let totalConfirmed =
+    covid_total_timeline[covid_total_timeline.length - 1].confirmed;
+  // // print world last updated date and total conformed
+  // console.log(lastDateWorld);
+  // console.log(totalConfirmed);
+
+  // the world country data //
+  // console.log(covid_world_timeline);
+  let mostRecentDate =
+    covid_world_timeline[covid_world_timeline.length - 1].date;
+  console.log("The last update date for all country: " + mostRecentDate);
+  let mostRecentDataCountryAll =
+    covid_world_timeline[covid_world_timeline.length - 1].list;
+  console.log(mostRecentDataCountryAll);
+  //////////////////////////////// KEEP TOP
+
+  //////////////////////////////// DATA AREA
   // make a map of country indexes for later use
   let countryIndexMap = {};
-  let list = covid_world_timeline[covid_world_timeline.length - 1].list;
-  for (let i = 0; i < list.length; i++) {
-    let country = list[i];
+  // var list = covid_world_timeline[covid_world_timeline.length - 1].list;
+  for (let i = 0; i < mostRecentDataCountryAll.length; i++) {
+    let country = mostRecentDataCountryAll[i];
     countryIndexMap[country.id] = i;
   }
+
+  // // calculated active cases in world data (active = confirmed - recovered)
+  // for (let i = 0; i < covid_total_timeline.length; i++) {
+  //   let di = covid_total_timeline[i];
+  //   di.active = di.confirmed - di.recovered;
+  // }
+
   // function that returns current slide
   // if index is not set, get last slide
   function getSlideData(index) {
     if (index == undefined) {
       index = covid_world_timeline.length - 1;
     }
+
     let data = covid_world_timeline[index];
+
     return data;
   }
 
@@ -524,6 +439,7 @@ am4core.ready(function () {
 
   // as we will be modifying raw data, make a copy
   let mapData = JSON.parse(JSON.stringify(slideData.list));
+
   let max = { confirmed: 0, recovered: 0, deaths: 0 };
 
   // the last day will have most
@@ -541,7 +457,10 @@ am4core.ready(function () {
     max.active = max.confirmed;
   }
 
-  // MAP SETUP
+  // END OF DATA AREA
+  //////////////////////////////// DATA AREA
+
+  //////////////////////////////// MAP SETUP
   // Create map instance
   let chart = am4core.create("chartdiv", am4maps.MapChart);
 
@@ -563,7 +482,8 @@ am4core.ready(function () {
   // Configure series
   let polygonTemplate = polygonSeries.mapPolygons.template;
   polygonTemplate.tooltipText =
-    "[bold]{name}:[/]" + "\n" + "[font-size:12px]Confirmed Cases: {confirmed}";
+    "[bold]{name}:[/]" + "\n" + "[font-size:12px]Total Confirmed: {confirmed}";
+
   polygonTemplate.fill = am4core.color("#727272");
 
   // Create hover state and set alternative fill color
@@ -572,5 +492,8 @@ am4core.ready(function () {
 
   // Remove Antarctica
   polygonSeries.exclude = ["AQ"];
+  //////////////////////////////// END OF MAP SETUP
 });
-////////////////// END OF MAP AREA //////////////////
+//////////////////////////////// END OF MAP AREA
+
+// for everyday total number display: "https://covid-api.com/api/reports/total"
