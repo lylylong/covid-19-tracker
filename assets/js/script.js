@@ -36,14 +36,12 @@ $("#modal-2-close").on("click", function () {
 });
 
 // title case function, to title case the input
-function capitalizeFirstLetter(string) {
-  return string[0].toUpperCase() + string.slice(1).toLowerCase();
-}
-function titleCase(string) {
-  return string
-    .split(" ")
-    .map((x) => capitalizeFirstLetter(x))
-    .join(" ");
+function titleCase(str) {
+  str = str.toLowerCase().split(" ");
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+  }
+  return str.join(" ");
 }
 
 // create history buttons
@@ -86,7 +84,6 @@ function saveCountryInputLocal() {
     input = inputBtn.textContent;
     console.log(input);
     // invoke the search function
-    // document.querySelector("img")?.remove();
     getCountryData();
   };
   deleteDiv.onclick = function () {
@@ -98,7 +95,6 @@ function saveCountryInputLocal() {
     if ((countryArray.length = 1)) {
       countryArray = [];
     }
-
     $(this).parents(".button-set").remove();
   };
 }
@@ -107,7 +103,6 @@ for (let i = 0; i < countryArray.length; i++) {
   inputList = $("#list-group-country");
   createHistory();
   inputBtn.textContent = countryArray[i];
-
   deleteDiv.onclick = function () {
     let toBeDelete = $(this).siblings().children(".list-group-item").text();
     countryArray = JSON.parse(localStorage.getItem("countryArray"));
@@ -117,7 +112,6 @@ for (let i = 0; i < countryArray.length; i++) {
     if ((countryArray.length = 1)) {
       countryArray = [];
     }
-
     $(this).parents(".button-set").remove();
   };
 }
@@ -129,7 +123,6 @@ $("#list-group-country").on("click", ".list-group-item", function () {
   document.querySelector("img")?.remove();
   getCountryData();
 });
-
 // Province Array Setup
 function saveProvinceInputLocal() {
   // if the input saved before, don't need to save again
@@ -166,7 +159,6 @@ for (let i = 0; i < provinceArray.length; i++) {
   inputList = $("#list-group-province");
   createHistory();
   inputBtn.textContent = provinceArray[i];
-
   deleteDiv.onclick = function () {
     let toBeDelete = $(this).siblings().children(".list-group-item").text();
     provinceArray = JSON.parse(localStorage.getItem("provinceArray"));
@@ -186,7 +178,6 @@ $("#list-group-province").on("click", ".list-group-item", function () {
   document.querySelector("img")?.remove();
   getProvinceData();
 });
-
 // City Array Setup
 function saveCityInputLocal() {
   // if the input saved before, don't need to save again
@@ -215,17 +206,14 @@ function saveCityInputLocal() {
     if ((cityArray.length = 1)) {
       cityArray = [];
     }
-
     $(this).parents(".button-set").remove();
   };
 }
-
 // initial print the local storage
 for (let i = 0; i < cityArray.length; i++) {
   inputList = $("#list-group-city");
   createHistory();
   inputBtn.textContent = cityArray[i];
-
   deleteDiv.onclick = function () {
     let toBeDelete = $(this).siblings().children(".list-group-item").text();
     cityArray = JSON.parse(localStorage.getItem("cityArray"));
@@ -235,7 +223,6 @@ for (let i = 0; i < cityArray.length; i++) {
     if ((cityArray.length = 1)) {
       cityArray = [];
     }
-
     $(this).parents(".button-set").remove();
   };
 }
@@ -246,8 +233,6 @@ $("#list-group-city").on("click", ".list-group-item", function () {
   document.querySelector("img")?.remove();
   getCityData();
 });
-// END OF ARRAY SETUP
-
 // One click to remove the history & clear the local storage
 function createClearButton() {
   let = clearButtonDiv = $(".clear-button-div");
@@ -263,41 +248,62 @@ function createClearButton() {
   });
 }
 createClearButton();
-
 //////////////// END OF DATA PREPARATION //////////////
 
 ///////////////////// FETCH INPUT /////////////////////
+
+///////////////////// TESTING /////////////////////////////
+///////////////////// TESTING /////////////////////////////
+
 // Input & Search 1: Country
 // Click the button to submit a country input & fetch data
-$("#search-buttonC").on("click", function () {
-  document.querySelector("img")?.remove();
-  console.log("country search button is clicked");
-  input = $(this).siblings("#input-div").children("#input").val();
-
-  if (
-    input === "US" ||
-    input === "us" ||
-    input === "usa" ||
-    input === "USA" ||
-    input === "united states" ||
-    input === "america"
-  ) {
-    input = "United States";
-  }
+$("#search-div").on("click", function () {
+  console.log("search button clicked");
+  input = $(this).parent().siblings("#input").val();
 
   if (input === null || input === "") {
     modalNoInputOn();
+    return;
   }
 
-  // call the fetch function
-  getCountryData();
-  saveCountryInputLocal();
+  console.log("search input: " + titleCase(input));
+  let optionValue = $(this).closest("#option-search").find("#category").val();
+  console.log("the category: " + optionValue);
+
+  if (optionValue === "country") {
+    console.log("select country");
+    if (
+      input === "US" ||
+      input === "us" ||
+      input === "usa" ||
+      input === "USA" ||
+      input === "united states" ||
+      input === "america"
+    ) {
+      input = "United States";
+    }
+    getCountryData();
+    saveCountryInputLocal();
+  } else if (optionValue === "province") {
+    console.log("select province");
+    if (input === "china" || input === "China" || input === "CHINA") {
+      modalOpen();
+      return;
+    }
+    getProvinceData();
+    saveProvinceInputLocal();
+  } else if (optionValue === "city") {
+    console.log("select city");
+    getCityData();
+    saveCityInputLocal();
+  }
+
   // clear the input space after each search
-  $(this).siblings("#input-div").children("#input").val("");
+  $(this).parent().siblings("#input").val("");
+  // dropdown list option back to default
+  document.getElementById("category").selectedIndex = 0;
 });
 
-// Fetch 1: Country
-// Get all the available countries & receiving the covid-19 updates
 function getCountryData() {
   fetch("https://www.trackcorona.live/api/countries")
     .then(function (response) {
@@ -308,7 +314,6 @@ function getCountryData() {
     .then(function (responseJson) {
       // Returns all the available province.
       for (let i = 0; i < responseJson.data.length; i++) {
-        // Returns the input country
         if (responseJson.data[i].location.includes(titleCase(input))) {
           modalOff();
           let confirm = document.querySelector("#confirm");
@@ -345,30 +350,6 @@ function getCountryData() {
     });
 }
 
-// Input & Search 2: Province
-// Click the button to submit a province input & fetch data
-$("#search-buttonP").on("click", function () {
-  document.querySelector("img")?.remove();
-  console.log("province search button is clicked");
-  input = $(this).siblings("#input-div").children("#input").val();
-
-  if (input === null || input === "") {
-    modalNoInputOn();
-  }
-
-  if (input === "china" || input === "China" || input === "CHINA") {
-    modalOpen();
-    return;
-  }
-  // call the fetch function
-  getProvinceData();
-  saveProvinceInputLocal();
-  // clear the input space after each search
-  $(this).siblings("#input-div").children("#input").val("");
-});
-
-// Fetch 2: Province
-// Get all the available provinces & receiving the covid-19 updates
 function getProvinceData() {
   fetch("https://www.trackcorona.live/api/provinces")
     .then(function (response) {
@@ -419,26 +400,6 @@ function getProvinceData() {
     });
 }
 
-// Input & Search 3: City
-// Click the button to submit a city input & fetch data
-$("#search-button-city").on("click", function () {
-  document.querySelector("img")?.remove();
-  console.log("city search button is clicked");
-  input = $(this).siblings("#input-div").children("#input").val();
-
-  if (input === null || input === "") {
-    modalNoInputOn();
-  }
-
-  // call the fetch function
-  getCityData();
-  saveCityInputLocal();
-  // clear the input space after each search
-  $(this).siblings("#input-div").children("#input").val("");
-});
-
-// Fetch 3: City
-// Get all the available cities & receiving the covid-19 updates
 function getCityData() {
   fetch("https://www.trackcorona.live/api/cities")
     .then(function (response) {

@@ -19,7 +19,7 @@
             <h1 class="title is-2 is-align-self-center">
               Covid-19 Tracking App
             </h1>
-            <h5 class="subtitle is-align-self-center is-black">
+            <h5 class="subtitle is-align-self-center">
               Search for Covid-19 Updates
             </h5>
             <!-- nav bar -->
@@ -43,54 +43,6 @@
       <aside
         class="left-column tile is-child notification has-background-grey-dark"
       >
-        <!-- search 1 -->
-        <div class="field has-addons has-addons-centered">
-          <div class="control" id="input-div">
-            <input
-              id="input"
-              class="input"
-              type="text"
-              placeholder="Search a country"
-            />
-          </div>
-          <div class="control" id="search-buttonC">
-            <a class="button is-info">
-              <i class="fa fa-search"></i>
-            </a>
-          </div>
-        </div>
-        <!-- search 2 -->
-        <div class="field has-addons has-addons-centered">
-          <div class="control" id="input-div">
-            <input
-              id="input"
-              class="input"
-              type="text"
-              placeholder="Search a province"
-            />
-          </div>
-          <div class="control" id="search-buttonP">
-            <a class="button is-info">
-              <i class="fa fa-search"></i>
-            </a>
-          </div>
-        </div>
-        <!-- search 3 -->
-        <div class="field has-addons has-addons-centered">
-          <div class="control" id="input-div">
-            <input
-              id="input"
-              class="input"
-              type="text"
-              placeholder="Search a city"
-            />
-          </div>
-          <div class="control" id="search-button-city">
-            <a class="button is-info">
-              <i class="fa fa-search"></i>
-            </a>
-          </div>
-        </div>
         <!-- final search area -->
         <div id="search-section">
           <input
@@ -102,40 +54,26 @@
           <div class="field has-addons" id="option-search">
             <div class="control is-expanded" id="option-div">
               <div class="select is-fullwidth">
-                <select name="Category">
-                  <option>Category</option>
-                  <option id="search-buttonC">Country</option>
-                  <option id="search-buttonP">Province</option>
-                  <option id="search-button-city">County/City</option>
+                <select name="category" id="category">
+                  <option value="" selected>Category</option>
+                  <option value="country">Country</option>
+                  <option value="province">Province</option>
+                  <option value="city">County/City</option>
                 </select>
               </div>
             </div>
-            <div class="control">
-              <button type="submit" class="button is-info" id="search-div">
+            <div class="control" id="search-div">
+              <button type="submit" class="button is-info" id="search-btn">
                 Search
               </button>
             </div>
           </div>
         </div>
         <!-- history list-->
-        <div class="left-down-col list-group-all mt-5" id="list-group-country">
-          <!-- <button class="button is-fullwidth list-group-item" id="list-group-item"></button> -->
-          <!-- <div class="field has-addons" id="button-set">
-            <div class="control is-expanded" id="button-div">
-              <button
-                class="button is-fullwidth list-group-item"
-                id="list-group-item"
-              >
-                Testing
-              </button>
-            </div>
-            <div class="control" id="delete-div">
-              <button class="button is-danger" id="delete-btn">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-          </div>  -->
-        </div>
+        <div
+          class="left-down-col list-group-all mt-5"
+          id="list-group-country"
+        ></div>
 
         <div
           class="left-down-col list-group-all mt-5"
