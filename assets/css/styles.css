@@ -107,3 +107,7 @@ section nav ul li a:hover {
   border-radius: 35px;
   text-shadow: none;
 }
+
+.footer {
+  padding: 25px;
+}
