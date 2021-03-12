@@ -26,11 +26,11 @@
 
 ## Website URL
 
-TBA
+https://lylylong.github.io/COVID-19-Tracker/
 
 ## GitHub URL
 
-TBA
+https://github.com/lylylong/COVID-19-Tracker.git
 
 ## Screenshots
 
