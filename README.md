@@ -26,11 +26,11 @@
 
 ## Website URL
 
-https://lylylong.github.io/COVID-19-Tracker/
+https://lylylong.github.io/covid-19-tracker/
 
 ## GitHub URL
 
-https://github.com/lylylong/COVID-19-Tracker.git
+https://github.com/lylylong/covid-19-tracker.git
 
 ## Screenshots
 
